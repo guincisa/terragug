@@ -1,10 +1,10 @@
 # This code is compatible with Terraform 4.25.0 and versions that are backwards compatible to 4.25.0.
 # For information about validating this Terraform code, see https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
-resource "google_compute_instance" "instance-20250417-153929" {
+resource "google_compute_instance" "instance-20250417-154218" {
   boot_disk {
     auto_delete = true
-    device_name = "instance-20250417-153929"
+    device_name = "instance-20250417-154218"
 
     initialize_params {
       image = "projects/debian-cloud/global/images/debian-12-bookworm-v20250415"
@@ -30,7 +30,7 @@ resource "google_compute_instance" "instance-20250417-153929" {
     enable-osconfig = "TRUE"
   }
 
-  name = "instance-20250417-153929"
+  name = "instance-20250417-154218"
 
   network_interface {
     access_config {
@@ -39,7 +39,7 @@ resource "google_compute_instance" "instance-20250417-153929" {
 
     queue_count = 0
     stack_type  = "IPV4_ONLY"
-    subnetwork  = "projects/cedar-scene-448616-v8/regions/us-central1/subnetworks/default"
+    subnetwork  = "projects/cedar-scene-448616-v8/regions/europe-west2/subnetworks/default"
   }
 
   scheduling {
@@ -60,15 +60,15 @@ resource "google_compute_instance" "instance-20250417-153929" {
     enable_vtpm                 = true
   }
 
-  tags = ["allin", "alllout"]
-  zone = "us-central1-f"
+  tags = ["allin", "allout", "http-server", "https-server"]
+  zone = "europe-west2-a"
 }
 
 module "ops_agent_policy" {
   source          = "github.com/terraform-google-modules/terraform-google-cloud-operations/modules/ops-agent-policy"
   project         = "cedar-scene-448616-v8"
-  zone            = "us-central1-f"
-  assignment_id   = "goog-ops-agent-v2-x86-template-1-4-0-us-central1-f"
+  zone            = "europe-west2-a"
+  assignment_id   = "goog-ops-agent-v2-x86-template-1-4-0-europe-west2-a"
   agents_rule = {
     package_state = "installed"
     version = "latest"
