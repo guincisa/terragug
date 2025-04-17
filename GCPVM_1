@@ -1,10 +1,10 @@
 # This code is compatible with Terraform 4.25.0 and versions that are backwards compatible to 4.25.0.
 # For information about validating this Terraform code, see https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
-resource "google_compute_instance" "instance-20250417-154218" {
+resource "google_compute_instance" "instance-20250417-155646" {
   boot_disk {
     auto_delete = true
-    device_name = "instance-20250417-154218"
+    device_name = "instance-20250417-155646"
 
     initialize_params {
       image = "projects/debian-cloud/global/images/debian-12-bookworm-v20250415"
@@ -20,17 +20,11 @@ resource "google_compute_instance" "instance-20250417-154218" {
   enable_display      = false
 
   labels = {
-    goog-ec-src           = "vm_add-tf"
-    goog-ops-agent-policy = "v2-x86-template-1-4-0"
+    goog-ec-src = "vm_add-tf"
   }
 
   machine_type = "e2-medium"
-
-  metadata = {
-    enable-osconfig = "TRUE"
-  }
-
-  name = "instance-20250417-154218"
+  name         = "instance-20250417-155646"
 
   network_interface {
     access_config {
@@ -39,7 +33,7 @@ resource "google_compute_instance" "instance-20250417-154218" {
 
     queue_count = 0
     stack_type  = "IPV4_ONLY"
-    subnetwork  = "projects/cedar-scene-448616-v8/regions/europe-west2/subnetworks/default"
+    subnetwork  = "projects/cedar-scene-448616-v8/regions/europe-central2/subnetworks/default"
   }
 
   scheduling {
@@ -61,24 +55,5 @@ resource "google_compute_instance" "instance-20250417-154218" {
   }
 
   tags = ["allin", "allout", "http-server", "https-server"]
-  zone = "europe-west2-a"
-}
-
-module "ops_agent_policy" {
-  source          = "github.com/terraform-google-modules/terraform-google-cloud-operations/modules/ops-agent-policy"
-  project         = "cedar-scene-448616-v8"
-  zone            = "europe-west2-a"
-  assignment_id   = "goog-ops-agent-v2-x86-template-1-4-0-europe-west2-a"
-  agents_rule = {
-    package_state = "installed"
-    version = "latest"
-  }
-  instance_filter = {
-    all = false
-    inclusion_labels = [{
-      labels = {
-        goog-ops-agent-policy = "v2-x86-template-1-4-0"
-      }
-    }]
-  }
+  zone = "europe-central2-a"
 }
