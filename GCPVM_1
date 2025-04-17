@@ -1,5 +1,5 @@
 provider "google" {
-  project     = "YOUR_PROJECT_ID"
+  project     = "cedar-scene-448616-v8"
   region      = "europe-west1"
   zone        = "europe-west1-c"
 }
